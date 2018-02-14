@@ -1,4 +1,6 @@
 applications:
   - name: iris-test
-    memory: 64M
-    command: iris-test
+    memory: 16M
+    file: ./irs-test
+    command: ./iris-test
+    buildpack: binary_buildpack
