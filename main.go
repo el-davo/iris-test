@@ -5,6 +5,8 @@ import (
 
 	"github.com/kataras/iris/middleware/logger"
 	"github.com/kataras/iris/middleware/recover"
+	"github.com/betacraft/yaag/irisyaag"
+	"github.com/betacraft/yaag/yaag"
 )
 
 func main() {
@@ -16,27 +18,17 @@ func main() {
 	app.Use(recover.New())
 	app.Use(logger.New())
 
-	// Method:   GET
-	// Resource: http://localhost:8080
-	app.Handle("GET", "/", func(ctx iris.Context) {
-		ctx.HTML("<h1>Welcome</h1>")
+	yaag.Init(&yaag.Config{
+		On:       true,
+		DocTitle: "Iris",
+		DocPath:  "apidoc.html",
+		BaseUrls: map[string]string{"Production": "", "Staging": ""},
+	})
+	app.Use(irisyaag.New())
+
+	app.Get("/json", func(ctx iris.Context) {
+		ctx.JSON(iris.Map{"result": "Hello World!"})
 	})
 
-	// same as app.Handle("GET", "/ping", [...])
-	// Method:   GET
-	// Resource: http://localhost:8080/ping
-	app.Get("/ping", func(ctx iris.Context) {
-		ctx.WriteString("pong")
-	})
-
-	// Method:   GET
-	// Resource: http://localhost:8080/hello
-	app.Get("/hello", func(ctx iris.Context) {
-		ctx.JSON(iris.Map{"message": "Hello Iris!"})
-	})
-
-	// http://localhost:8080
-	// http://localhost:8080/ping
-	// http://localhost:8080/hello
 	app.Run(iris.Addr(":8080"), iris.WithoutServerError(iris.ErrServerClosed))
 }
