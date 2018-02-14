@@ -1,0 +1,4 @@
+applications:
+  - name: iris-test
+    memory: 64M
+    command: iris-test
