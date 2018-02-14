@@ -1,6 +1,15 @@
 language: go
-
 go:
-  - master
-
+- master
 script: go build
+deploy:
+  provider: cloudfoundry
+  api: https://api.run.pivotal.io
+  username: david.ahern26@gmail.com
+  password:
+    secure: KHHYhAuuvpMAh1Om2VJfstscNUfqvzlmBX7vNggbkDX4v6yWKzMNNviFAjDL+Do+njpm8tOgRRnAYUJICXqAgG5Scdyw7G0kB1Inz5S2huZ1mbs1GbtyByO9Ubz71QQ6By/XB0EFZF8MeufYIAPj76/ro6LwHCK9Jtm5dWR+p3fJ07qhmFjd8DLiH7gBd9+9zZDK50wG+G/PinnUNAiv0AwSzIvmibH8JnfOu8n6y/Eqg5WOk97czf3K0fvjSbMZ0iQEAKwskah9XPrTSVuGy1TxITCR/vSOY1UeBexH26fEx0VAQZVOTx1EKPrlq42UgnmszH1QC7qHQLfzWKqTOV5+PpbBSXIQiC2M6RGo/2lnLoc7pxa9aElm5PM5pIFMo/bMkaAeFz4sdedXdbEsmlZYXwDyCdAlaqFgVhb91mfhB4OviOpSZho2K6y76JoXCPyBFTbv8mlUMMbTg1SFHi0a4qg1IBXePw++8dbZifPh+SQOsRNF91pd/rwpJI+jpmtZ6luD3uc2n1W/ocKHigJsYsj9q8h0uFoZbg3N2tXk7IwJ/cfxKek/2wUuGn4koUQzpoZXYYmQIXVLmUVLwWsXB1iDZU0tMJpXUwiudDc5ecPUNJxUap2RYP1snxEMW1RQ4OypEodSR4KCw4JyJDfYG/Nf0HqtVjxGIwWBjIA=
+  organization: thor
+  space: prod
+  on:
+    repo: el-davo/iris-test
+    branch: master
